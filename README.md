@@ -1,16 +1,10 @@
-# quartus-lite
+# Quartus Lite (Cyclone V environment) Dockerized
 
-Quartus Lite docker.
+Based on https://github.com/chriz2600/quartus-lite
 
-For Mac OS X users, I included a `quartus` shell script, which allows execution of e.g. `quartus_sh` inside the docker container. The current working directory is mounted to `/build`. 
+Image generated: theypsilon/quartus-lite-c5:17.0
 
-Example:
+Use it as base and then:
 ```
-quartus quartus_sh --flow compile my.qpf
+RUN /opt/intelFPGA_lite/quartus/bin/quartus_sh --flow compile your_core.qpf
 ```
-`quartus_sh` command is executed in the current working directory. 
-Just copy `quartus_sh` to a directory in your `PATH`.
-
-Environment variables:
-- `JTAG_SERVER`: allows setting a server for remote programming
-- `JTAG_PASSWD`: allows setting a server password for remote programming
