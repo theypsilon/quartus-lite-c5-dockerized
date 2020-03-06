@@ -2,6 +2,12 @@
 
 set timeout -1
 
+set count [lindex $argv 0]
+if {$count == ""} {
+    puts "Needs to specify a count as first parameter."
+    exit 1
+}
+
 spawn /quartus/setup.sh
 
 expect "Press \\\[Enter\\\] to continue:" { send "\r" }
@@ -9,7 +15,6 @@ expect "Press \\\[Enter\\\] to continue:" { send "\r" }
 
 puts "----------------------------------"
 
-set count 82;
 while {$count > 0 } {
     expect "Press \\\[Enter\\\] to continue:" { send "\r" }
     puts "\n\ncount : $count\n\n";
