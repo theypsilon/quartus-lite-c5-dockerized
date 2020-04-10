@@ -72,3 +72,7 @@ docker build \
     --build-arg QUARTUS_SETUP_COUNT=48 \
     -t theypsilon/quartus-lite-c5:19.1.dockerheavy0 .
 docker push theypsilon/quartus-lite-c5:19.1.dockerheavy0
+
+# @TODO
+# Quartus 13.1: http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_tar/Quartus-web-13.1.0.162-linux.tar
+# Quartus 13.0sp1: http://download.altera.com/akdlm/software/acdsinst/13.0sp1/232/ib_tar/Quartus-web-13.0.1.232-linux.tar
