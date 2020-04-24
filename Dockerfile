@@ -1,4 +1,5 @@
 FROM ubuntu:14.04
+LABEL maintainer="theypsilon@gmail.com"
 WORKDIR /quartus
 ADD files/ /files/
 ARG QUARTUS_URL
