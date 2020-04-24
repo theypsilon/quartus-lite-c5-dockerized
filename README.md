@@ -21,3 +21,8 @@ Use them as base and then:
 ```
 RUN /opt/intelFPGA_lite/quartus/bin/quartus_sh --flow compile your_core.qpf
 ```
+
+### License
+
+Copyright © 2020, [José Manuel Barroso Galindo](https://github.com/theypsilon).
+Released under the [GPL v3 License](LICENSE).
