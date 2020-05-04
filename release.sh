@@ -13,6 +13,13 @@ docker build \
 docker push theypsilon/quartus-lite-c5:17.0.docker0
 
 docker build \
+    --build-arg QUARTUS_URL=http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar \
+    --build-arg QUARTUS_SETUP_COUNT=82 \
+    --build-arg QUARTUS_UPDATE="Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602" \
+    -t theypsilon/quartus-lite-c5:17.0.2.docker0 .
+docker push theypsilon/quartus-lite-c5:17.0.2.docker0
+
+docker build \
     --build-arg QUARTUS_URL=http://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_tar/Quartus-lite-17.1.0.590-linux.tar \
     --build-arg QUARTUS_SETUP_COUNT=88 \
     -t theypsilon/quartus-lite-c5:17.1.docker0 .
@@ -45,6 +52,14 @@ docker build \
     --build-arg QUARTUS_SETUP_COUNT=82 \
     -t theypsilon/quartus-lite-c5:17.0.dockerheavy0 .
 docker push theypsilon/quartus-lite-c5:17.0.dockerheavy0
+
+docker build \
+    -f Dockerfile-heavy \
+    --build-arg QUARTUS_URL=http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar \
+    --build-arg QUARTUS_SETUP_COUNT=82 \
+    --build-arg QUARTUS_UPDATE="Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602" \
+    -t theypsilon/quartus-lite-c5:17.0.2.dockerheavy0 .
+docker push theypsilon/quartus-lite-c5:17.0.2.dockerheavy0
 
 docker build \
     -f Dockerfile-heavy \

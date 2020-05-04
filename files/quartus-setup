@@ -7,6 +7,7 @@ if {$count == ""} {
     puts "Needs to specify a count as first parameter."
     exit 1
 }
+set update [lindex $argv 1]
 
 spawn /quartus/setup.sh
 
@@ -32,6 +33,9 @@ expect "Quartus Prime Lite Edition (Free)  - Devices - Cyclone 10" { send "n\r" 
 expect "Quartus Prime Lite Edition (Free)  - Devices - Cyclone V" { send "y\r" }
 expect "Quartus Prime Lite Edition (Free)  - Devices - MAX II/V" { send "n\r" }
 expect "Quartus Prime Lite Edition (Free)  - Devices - MAX 10 FPGA" { send "n\r" }
+if {$update != ""} {
+    expect "$update" { send "y\r" }
+}
 expect "ModelSim - Intel FPGA Starter Edition (Free)" { send "n\r" }
 expect "ModelSim - Intel FPGA Edition" { send "n\r" }
 expect "Is the selection above correct? \\\[Y/n\\\]:" { send "y\r" }
