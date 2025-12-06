@@ -37,11 +37,11 @@ release "theypsilon/quartus-lite-c5:17.0.docker${VERSION}" "quartus_slim" \
     "e71eeca4c8e1efaca902a58a37544c0572c6f45e" \
     "82"
 
-# release "theypsilon/quartus-lite-c5:17.0.2.docker${VERSION}" "quartus_slim" \
-#     "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
-#     "02aebab728d54e3ca8660d2646fdf93bc669b0ac" \
-#     "82" \
-#     "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
+release "theypsilon/quartus-lite-c5:17.0.2.docker${VERSION}" "quartus_slim" \
+    "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
+    "02aebab728d54e3ca8660d2646fdf93bc669b0ac" \
+    "82" \
+    "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
 
 release "theypsilon/quartus-lite-c5:17.1.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_tar/Quartus-lite-17.1.0.590-linux.tar" \
@@ -70,11 +70,11 @@ release "theypsilon/quartus-lite-c5:17.0.dockerheavy${VERSION}" "quartus_heavy" 
     "e71eeca4c8e1efaca902a58a37544c0572c6f45e" \
     "82"
 
-# release "theypsilon/quartus-lite-c5:17.0.2.dockerheavy${VERSION}" "quartus_heavy" \
-#     "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
-#     "02aebab728d54e3ca8660d2646fdf93bc669b0ac" \
-#     "82" \
-#     "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
+release "theypsilon/quartus-lite-c5:17.0.2.dockerheavy${VERSION}" "quartus_heavy" \
+    "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
+    "02aebab728d54e3ca8660d2646fdf93bc669b0ac" \
+    "82" \
+    "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
 
 release "theypsilon/quartus-lite-c5:17.1.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_tar/Quartus-lite-17.1.0.590-linux.tar" \
