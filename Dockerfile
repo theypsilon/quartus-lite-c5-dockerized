@@ -7,16 +7,16 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get -y install --no-install-recommends curl expect && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /tmp/quartus-install
+WORKDIR /quartus
 ADD files/ /files/
 ARG QUARTUS_URL
 ARG QUARTUS_SETUP_COUNT
 ARG QUARTUS_UPDATE
 
-RUN curl -L -o quartus.tar ${QUARTUS_URL} && \
+RUN curl -sS -L -o quartus.tar ${QUARTUS_URL} && \
     tar xvf quartus.tar && \
     /files/quartus-setup "${QUARTUS_SETUP_COUNT}" "${QUARTUS_UPDATE}" && \
-    rm -rf /tmp/quartus-install/* && \
+    rm -rf /quartus/* && \
     rm -rf /files
 
 FROM ubuntu:14.04 AS quartus_slim
