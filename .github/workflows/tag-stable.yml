@@ -41,8 +41,8 @@ jobs:
             docker pull "$SRC_TAG"
             docker tag "$SRC_TAG" "$DST_TAG"
             docker push "$DST_TAG"
-            docker image rm -f "$SRC_TAG" "$DST_TAG" || true
             docker image prune -f
+            docker image rm -f "$SRC_TAG" "$DST_TAG" || true
           done
 
           # Process heavy versions
@@ -54,8 +54,8 @@ jobs:
             docker pull "$SRC_TAG"
             docker tag "$SRC_TAG" "$DST_TAG"
             docker push "$DST_TAG"
-            docker image rm -f "$SRC_TAG" "$DST_TAG" || true
             docker image prune -f
+            docker image rm -f "$SRC_TAG" "$DST_TAG" || true
           done
 
           echo "Successfully promoted version ${VERSION} to stable tags"
