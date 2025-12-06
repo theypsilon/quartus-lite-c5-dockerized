@@ -1,9 +1,7 @@
 FROM ubuntu:14.04 AS quartus_builder
 LABEL maintainer="theypsilon@gmail.com"
 
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y install --no-install-recommends curl expect && \
     rm -rf /var/lib/apt/lists/*
 
@@ -25,9 +23,7 @@ LABEL maintainer="theypsilon@gmail.com"
 
 COPY --from=quartus_builder /opt/intelFPGA_lite /opt/intelFPGA_lite
 
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y install --no-install-recommends locales libtcmalloc-minimal4 libglib2.0-0 && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen en_US.UTF-8 && \
@@ -46,9 +42,7 @@ LABEL maintainer="theypsilon@gmail.com"
 
 COPY --from=quartus_builder /opt/intelFPGA_lite /opt/intelFPGA_lite
 
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && \
+RUN apt-get update && \
     apt-get -y install --no-install-recommends locales libtcmalloc-minimal4 libglib2.0-0 && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen en_US.UTF-8 && \
