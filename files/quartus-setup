@@ -2,9 +2,15 @@
 
 set timeout 300
 
-set update [lindex $argv 0]
+set setup_path [lindex $argv 0]
+if {$setup_path == ""} {
+    puts "Needs to specify setup script path as first parameter."
+    exit 1
+}
+set update [lindex $argv 1]
 
-spawn /quartus/setup.sh
+puts "Running setup script: $setup_path\n"
+spawn $setup_path
 
 expect "Press \\\[Enter\\\] to continue:" { send "\r" }
 expect "Press \\\[Enter\\\] to continue:" { send "\r" }
