@@ -19,7 +19,7 @@ release() {
     docker images "${image_name}" --format '{{.Repository}}:{{.Tag}} {{.Size}}' >> sizes.txt
     docker push "${image_name}"
     docker image rm -f "${image_name}" || true
-    docker builder prune -f --keep-storage=30G
+    docker builder prune -f --reserved-space=30G
 }
 
 VERSION=$(cat version.txt)
