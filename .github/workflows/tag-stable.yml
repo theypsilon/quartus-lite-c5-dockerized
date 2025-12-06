@@ -35,17 +35,27 @@ jobs:
           # Process slim versions
           for QVER in $QUARTUS_VERSIONS; do
             echo "Processing slim version: $QVER"
-            docker pull theypsilon/quartus-lite-c5:${QVER}.docker${VERSION}
-            docker tag theypsilon/quartus-lite-c5:${QVER}.docker${VERSION} theypsilon/quartus-lite-c5:${QVER}
-            docker push theypsilon/quartus-lite-c5:${QVER}
+            SRC_TAG="theypsilon/quartus-lite-c5:${QVER}.docker${VERSION}"
+            DST_TAG="theypsilon/quartus-lite-c5:${QVER}"
+
+            docker pull "$SRC_TAG"
+            docker tag "$SRC_TAG" "$DST_TAG"
+            docker push "$DST_TAG"
+            docker image rm -f "$SRC_TAG" "$DST_TAG" || true
+            docker image prune -f
           done
 
           # Process heavy versions
           for QVER in $QUARTUS_VERSIONS; do
             echo "Processing heavy version: $QVER"
-            docker pull theypsilon/quartus-lite-c5:${QVER}.dockerheavy${VERSION}
-            docker tag theypsilon/quartus-lite-c5:${QVER}.dockerheavy${VERSION} theypsilon/quartus-lite-c5:${QVER}-heavy
-            docker push theypsilon/quartus-lite-c5:${QVER}-heavy
+            SRC_TAG="theypsilon/quartus-lite-c5:${QVER}.dockerheavy${VERSION}"
+            DST_TAG="theypsilon/quartus-lite-c5:${QVER}-heavy"
+
+            docker pull "$SRC_TAG"
+            docker tag "$SRC_TAG" "$DST_TAG"
+            docker push "$DST_TAG"
+            docker image rm -f "$SRC_TAG" "$DST_TAG" || true
+            docker image prune -f
           done
 
           echo "Successfully promoted version ${VERSION} to stable tags"
