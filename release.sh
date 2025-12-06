@@ -5,12 +5,6 @@ set -euo pipefail
 
 VERSION=$(cat version.txt)
 
-echo "# Image sizes for version ${VERSION}" > sizes.txt
-echo "# Format: image_tag size" >> sizes.txt
-echo "" >> sizes.txt
-
-# slim versions
-
 release() {
     local image_name="$1"
     local target_step="$2"
@@ -30,14 +24,20 @@ release() {
     docker image rm -f "${image_name}" || true
 }
 
-release "theypsilon/quartus-lite-c5:17.0.docker${VERSION}" "quartus_slim" \
-    "http://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_tar/Quartus-lite-17.0.0.595-linux.tar" \
-    "82"
+echo "# Image sizes for version ${VERSION}" > sizes.txt
+echo "# Format: image_tag size" >> sizes.txt
+echo "" >> sizes.txt
+
+# slim versions
 
 release "theypsilon/quartus-lite-c5:17.0.2.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
     "82" \
     "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
+
+release "theypsilon/quartus-lite-c5:17.0.docker${VERSION}" "quartus_slim" \
+    "http://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_tar/Quartus-lite-17.0.0.595-linux.tar" \
+    "82"
 
 release "theypsilon/quartus-lite-c5:17.1.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_tar/Quartus-lite-17.1.0.590-linux.tar" \
@@ -57,14 +57,14 @@ release "theypsilon/quartus-lite-c5:19.1.docker${VERSION}" "quartus_slim" \
 
 # heavy versions
 
-release "theypsilon/quartus-lite-c5:17.0.dockerheavy${VERSION}" "quartus_heavy" \
-    "http://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_tar/Quartus-lite-17.0.0.595-linux.tar" \
-    "82"
-
 release "theypsilon/quartus-lite-c5:17.0.2.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
     "82" \
     "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
+
+release "theypsilon/quartus-lite-c5:17.0.dockerheavy${VERSION}" "quartus_heavy" \
+    "http://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_tar/Quartus-lite-17.0.0.595-linux.tar" \
+    "82"
 
 release "theypsilon/quartus-lite-c5:17.1.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_tar/Quartus-lite-17.1.0.590-linux.tar" \
