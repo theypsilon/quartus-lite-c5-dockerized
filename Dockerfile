@@ -13,7 +13,7 @@ ARG QUARTUS_URL
 ARG QUARTUS_SETUP_COUNT
 ARG QUARTUS_UPDATE
 
-RUN curl -sS -L -o quartus.tar ${QUARTUS_URL} && \
+RUN curl --fail --show-error --location --progress-bar -o quartus.tar ${QUARTUS_URL} && \
     tar xvf quartus.tar && rm quartus.tar && \
     /files/quartus-setup "${QUARTUS_SETUP_COUNT}" "${QUARTUS_UPDATE}" && \
     rm -rf /quartus/* && \
