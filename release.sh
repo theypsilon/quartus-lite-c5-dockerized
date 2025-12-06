@@ -10,14 +10,12 @@ release() {
     local target_step="$2"
     local quartus_url="$3"
     local quartus_sha1="$4"
-    local quartus_setup_count="$5"
-    local quartus_update="${6:-}"
+    local quartus_update="${5:-}"
 
     docker build \
         --target "${target_step}" \
         --build-arg QUARTUS_URL="${quartus_url}" \
         --build-arg QUARTUS_SHA1="${quartus_sha1}" \
-        --build-arg QUARTUS_SETUP_COUNT="${quartus_setup_count}" \
         --build-arg QUARTUS_UPDATE="${quartus_update}" \
         -t "${image_name}" .
     docker images "${image_name}" --format '{{.Repository}}:{{.Tag}} {{.Size}}' >> sizes.txt
@@ -34,67 +32,55 @@ echo "" >> sizes.txt
 
 release "theypsilon/quartus-lite-c5:17.0.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_tar/Quartus-lite-17.0.0.595-linux.tar" \
-    "e71eeca4c8e1efaca902a58a37544c0572c6f45e" \
-    "82"
+    "e71eeca4c8e1efaca902a58a37544c0572c6f45e"
 
 release "theypsilon/quartus-lite-c5:17.0.2.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
     "02aebab728d54e3ca8660d2646fdf93bc669b0ac" \
-    "82" \
     "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
 
 release "theypsilon/quartus-lite-c5:17.1.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_tar/Quartus-lite-17.1.0.590-linux.tar" \
-    "b5f40bdcb6846269bff2c8fea698f85125bd654c" \
-    "88"
+    "b5f40bdcb6846269bff2c8fea698f85125bd654c"
 
 release "theypsilon/quartus-lite-c5:18.0.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_tar/Quartus-lite-18.0.0.614-linux.tar" \
-    "d8090b766e74f6194c7193b36f221547ba8ea594" \
-    "45"
+    "d8090b766e74f6194c7193b36f221547ba8ea594"
 
 release "theypsilon/quartus-lite-c5:18.1.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_tar/Quartus-lite-18.1.0.625-linux.tar" \
-    "23ef7030b1153c3f4bd20b7b320847079e3235fa" \
-    "45"
+    "23ef7030b1153c3f4bd20b7b320847079e3235fa"
 
 release "theypsilon/quartus-lite-c5:19.1.docker${VERSION}" "quartus_slim" \
     "http://download.altera.com/akdlm/software/acdsinst/19.1std/670/ib_tar/Quartus-lite-19.1.0.670-linux.tar" \
-    "13240b6aa9a4643225fcac78ad491e703e7de070" \
-    "48"
+    "13240b6aa9a4643225fcac78ad491e703e7de070"
 
 # heavy versions
 
 release "theypsilon/quartus-lite-c5:17.0.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/17.0std/595/ib_tar/Quartus-lite-17.0.0.595-linux.tar" \
-    "e71eeca4c8e1efaca902a58a37544c0572c6f45e" \
-    "82"
+    "e71eeca4c8e1efaca902a58a37544c0572c6f45e"
 
 release "theypsilon/quartus-lite-c5:17.0.2.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/17.0std.2/602/ib_tar/Quartus-lite-17.0.2.602-linux.tar" \
     "02aebab728d54e3ca8660d2646fdf93bc669b0ac" \
-    "82" \
     "Quartus Prime Lite Edition (Free)  - Quartus Prime Update 17.0.2.602"
 
 release "theypsilon/quartus-lite-c5:17.1.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/17.1std/590/ib_tar/Quartus-lite-17.1.0.590-linux.tar" \
-    "b5f40bdcb6846269bff2c8fea698f85125bd654c" \
-    "88"
+    "b5f40bdcb6846269bff2c8fea698f85125bd654c"
 
 release "theypsilon/quartus-lite-c5:18.0.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/18.0std/614/ib_tar/Quartus-lite-18.0.0.614-linux.tar" \
-    "d8090b766e74f6194c7193b36f221547ba8ea594" \
-    "45"
+    "d8090b766e74f6194c7193b36f221547ba8ea594"
 
 release "theypsilon/quartus-lite-c5:18.1.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/18.1std/625/ib_tar/Quartus-lite-18.1.0.625-linux.tar" \
-    "23ef7030b1153c3f4bd20b7b320847079e3235fa" \
-    "45"
+    "23ef7030b1153c3f4bd20b7b320847079e3235fa"
 
 release "theypsilon/quartus-lite-c5:19.1.dockerheavy${VERSION}" "quartus_heavy" \
     "http://download.altera.com/akdlm/software/acdsinst/19.1std/670/ib_tar/Quartus-lite-19.1.0.670-linux.tar" \
-    "13240b6aa9a4643225fcac78ad491e703e7de070" \
-    "48"
+    "13240b6aa9a4643225fcac78ad491e703e7de070"
 
 # @TODO
 # Quartus 13.1: http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_tar/Quartus-web-13.1.0.162-linux.tar

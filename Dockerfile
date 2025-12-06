@@ -11,13 +11,12 @@ WORKDIR /quartus
 ADD files/ /files/
 ARG QUARTUS_URL
 ARG QUARTUS_SHA1
-ARG QUARTUS_SETUP_COUNT
 ARG QUARTUS_UPDATE
 
 RUN curl --fail --silent --show-error --location --retry 5 --retry-delay 10 --continue-at - -o quartus.tar ${QUARTUS_URL} && \
     echo "${QUARTUS_SHA1}  quartus.tar" | sha1sum -c - && \
     tar xvf quartus.tar && rm quartus.tar && \
-    /files/quartus-setup "${QUARTUS_SETUP_COUNT}" "${QUARTUS_UPDATE}" && \
+    /files/quartus-setup "${QUARTUS_UPDATE}" && \
     rm -rf /quartus/* && \
     rm -rf /files
 
