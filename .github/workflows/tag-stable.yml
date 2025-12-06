@@ -27,8 +27,8 @@ jobs:
           set -euo pipefail
           VERSION="${{ github.event.inputs.version }}"
 
-          # Extract Quartus versions from docker push operations in release.sh
-          QUARTUS_VERSIONS=$(grep 'docker push' release.sh | grep -oP 'quartus-lite-c5:\K[0-9.]+(?=\.docker)' | sort -u)
+          # Extract Quartus versions from release operations in release.sh
+          QUARTUS_VERSIONS=$(grep '^release' release.sh | grep -oP 'quartus-lite-c5:\K[0-9.]+(?=\.docker)' | sort -u)
 
           echo "Found Quartus versions: $QUARTUS_VERSIONS"
 
