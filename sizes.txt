@@ -1,0 +1,15 @@
+# Image sizes for version 1
+# Format: image_tag size
+
+theypsilon/quartus-lite-c5:17.0.docker1 4.55GB
+theypsilon/quartus-lite-c5:17.0.dockerheavy1 8.5GB
+theypsilon/quartus-lite-c5:17.0.2.docker1 5.21GB
+theypsilon/quartus-lite-c5:17.0.2.dockerheavy1 11.1GB
+theypsilon/quartus-lite-c5:17.1.docker1 4.55GB
+theypsilon/quartus-lite-c5:17.1.dockerheavy1 8.55GB
+theypsilon/quartus-lite-c5:18.0.docker1 4.55GB
+theypsilon/quartus-lite-c5:18.0.dockerheavy1 8.51GB
+theypsilon/quartus-lite-c5:18.1.docker1 4.55GB
+theypsilon/quartus-lite-c5:18.1.dockerheavy1 8.52GB
+theypsilon/quartus-lite-c5:19.1.docker1 4.74GB
+theypsilon/quartus-lite-c5:19.1.dockerheavy1 10.5GB
