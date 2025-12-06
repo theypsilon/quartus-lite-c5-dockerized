@@ -2,29 +2,41 @@
 
 Based on https://github.com/chriz2600/quartus-lite
 
-Images on [docker hub](https://hub.docker.com/r/theypsilon/quartus-lite-c5): 
+Images on [docker hub](https://hub.docker.com/r/theypsilon/quartus-lite-c5):
 ```bash
-theypsilon/quartus-lite-c5:17.0.docker0   # 4.57GB
-theypsilon/quartus-lite-c5:17.0.2.docker0 # 7.18GB
-theypsilon/quartus-lite-c5:17.1.docker0   # 4.56GB
-theypsilon/quartus-lite-c5:18.0.docker0   # 4.56GB
-theypsilon/quartus-lite-c5:18.1.docker0   # 4.57GB
-theypsilon/quartus-lite-c5:19.1.docker0   # 4.76GB
+# Slim versions - Some components were removed
+theypsilon/quartus-lite-c5:17.0
+theypsilon/quartus-lite-c5:17.0.2
+theypsilon/quartus-lite-c5:17.1
+theypsilon/quartus-lite-c5:18.0
+theypsilon/quartus-lite-c5:18.1
+theypsilon/quartus-lite-c5:19.1
 
-theypsilon/quartus-lite-c5:17.0.dockerheavy0   # 8.51GB
-theypsilon/quartus-lite-c5:17.0.2.dockerheavy0 # 11.1GB
-theypsilon/quartus-lite-c5:17.1.dockerheavy0   # 8.55GB
-theypsilon/quartus-lite-c5:18.0.dockerheavy0   # 8.52GB
-theypsilon/quartus-lite-c5:18.1.dockerheavy0   # 8.53GB
-theypsilon/quartus-lite-c5:19.1.dockerheavy0   # 10.5GB
+# Heavy versions - Includes all components
+theypsilon/quartus-lite-c5:17.0-heavy
+theypsilon/quartus-lite-c5:17.0.2-heavy
+theypsilon/quartus-lite-c5:17.1-heavy
+theypsilon/quartus-lite-c5:18.0-heavy
+theypsilon/quartus-lite-c5:18.1-heavy
+theypsilon/quartus-lite-c5:19.1-heavy
 ```
+
+For image sizes, see [sizes.txt](sizes.txt).
 
 Use them as base and then:
+```dockerfile
+FROM theypsilon/quartus-lite-c5:17.0
+COPY . /project
+RUN quartus_sh --flow compile your_core.qpf
 ```
-RUN /opt/intelFPGA_lite/quartus/bin/quartus_sh --flow compile your_core.qpf
+
+Or run directly (mounts current directory to /project):
+```bash
+docker run -v $(pwd):/project theypsilon/quartus-lite-c5:17.0 \
+    quartus_sh --flow compile your_core.qpf
 ```
 
 ### License
 
-Copyright © 2020, [José Manuel Barroso Galindo](https://github.com/theypsilon).
+Copyright © 2020-2025, [José Manuel Barroso Galindo](https://github.com/theypsilon).
 Released under the [MIT License](LICENSE).

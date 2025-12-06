@@ -1,20 +1,58 @@
-FROM ubuntu:14.04
+FROM ubuntu:14.04 AS quartus_builder
 LABEL maintainer="theypsilon@gmail.com"
-WORKDIR /quartus
+
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get -y install --no-install-recommends curl expect && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tmp/quartus-install
 ADD files/ /files/
 ARG QUARTUS_URL
 ARG QUARTUS_SETUP_COUNT
 ARG QUARTUS_UPDATE
-RUN apt-get update && apt-get -y install locales expect curl libtcmalloc-minimal4 libglib2.0-0 && \
+
+RUN curl -o quartus.tar ${QUARTUS_URL} && \
+    tar xf quartus.tar && \
+    /files/quartus-setup "${QUARTUS_SETUP_COUNT}" "${QUARTUS_UPDATE}" && \
+    rm -rf /tmp/quartus-install/* && \
+    rm -rf /files
+
+FROM ubuntu:14.04 AS quartus_slim
+LABEL maintainer="theypsilon@gmail.com"
+
+COPY --from=quartus_builder /opt/intelFPGA_lite /opt/intelFPGA_lite
+
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get -y install --no-install-recommends locales libtcmalloc-minimal4 libglib2.0-0 && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen en_US.UTF-8 && \
-    curl -o quartus.tar ${QUARTUS_URL} && \
-    tar xvf quartus.tar && \
-    /files/quartus-setup "${QUARTUS_SETUP_COUNT}" "${QUARTUS_UPDATE}" && \
-    rm -rf /quartus/* && \
-    apt-get remove -y --auto-remove curl expect && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /opt/intelFPGA_lite/nios2eds && \
     rm -rf /opt/intelFPGA_lite/ip && \
-    rm -rf /opt/intelFPGA_lite/hls
-ENV LD_PRELOAD /usr/lib/libtcmalloc_minimal.so.4
+    rm -rf /opt/intelFPGA_lite/hls && \
+    rm -rf /opt/intelFPGA_lite/quartus/linux64/helpdb
+
+WORKDIR /project
+ENV LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4 \
+    PATH=/opt/intelFPGA_lite/quartus/bin:$PATH
+
+FROM ubuntu:14.04 AS quartus_heavy
+LABEL maintainer="theypsilon@gmail.com"
+
+COPY --from=quartus_builder /opt/intelFPGA_lite /opt/intelFPGA_lite
+
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && \
+    apt-get -y install --no-install-recommends locales libtcmalloc-minimal4 libglib2.0-0 && \
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen en_US.UTF-8 && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /project
+ENV LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so.4 \
+    PATH=/opt/intelFPGA_lite/quartus/bin:$PATH

@@ -1,0 +1,51 @@
+name: Tag Stable Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number to promote (e.g., 1, 2, 3)'
+        required: true
+        type: string
+
+jobs:
+  tag-stable:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Pull, tag and push stable versions
+        run: |
+          set -euo pipefail
+          VERSION="${{ github.event.inputs.version }}"
+
+          # Extract Quartus versions from docker push operations in release.sh
+          QUARTUS_VERSIONS=$(grep 'docker push' release.sh | grep -oP 'quartus-lite-c5:\K[0-9.]+(?=\.docker)' | sort -u)
+
+          echo "Found Quartus versions: $QUARTUS_VERSIONS"
+
+          # Process slim versions
+          for QVER in $QUARTUS_VERSIONS; do
+            echo "Processing slim version: $QVER"
+            docker pull theypsilon/quartus-lite-c5:${QVER}.docker${VERSION}
+            docker tag theypsilon/quartus-lite-c5:${QVER}.docker${VERSION} theypsilon/quartus-lite-c5:${QVER}
+            docker push theypsilon/quartus-lite-c5:${QVER}
+          done
+
+          # Process heavy versions
+          for QVER in $QUARTUS_VERSIONS; do
+            echo "Processing heavy version: $QVER"
+            docker pull theypsilon/quartus-lite-c5:${QVER}.dockerheavy${VERSION}
+            docker tag theypsilon/quartus-lite-c5:${QVER}.dockerheavy${VERSION} theypsilon/quartus-lite-c5:${QVER}-heavy
+            docker push theypsilon/quartus-lite-c5:${QVER}-heavy
+          done
+
+          echo "Successfully promoted version ${VERSION} to stable tags"
